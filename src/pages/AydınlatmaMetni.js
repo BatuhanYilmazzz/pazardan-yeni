@@ -1,18 +1,28 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
-import { Container } from 'react-bootstrap';
+import { Container, Spinner } from 'react-bootstrap';
 
 const AydınlatmaMetni = () => {
   const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
+      setLoading(true);
       const result = await axios(
-        'https://cors-anywhere.herokuapp.com/https://mservice.pazardan.app/pazardanWebApp/AgreementSelect?type=AydinlatmaMetni'
+        'https://cors-anywhere.herokuapp.com/https://mservice.pazardan.app/pazardanWebApp/AgreementSelect?type=AydinlatmaMetni',
+        {
+          headers: {
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': '*',
+          },
+        }
       );
-
       setData(result.data.data[0].user_agreement_detail);
+      if (data) {
+        setLoading(false);
+      }
     };
     fetchData();
     // eslint-disable-next-line
@@ -21,6 +31,21 @@ const AydınlatmaMetni = () => {
     return {
       __html: data && data,
     };
+  }
+  if (loading) {
+    return (
+      <div
+        style={{
+          height: '100vh',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          flexDirection: 'column',
+        }}
+      >
+        <Spinner animation='grow' variant='dark' />
+      </div>
+    );
   }
   return (
     <AydınlatmaMetniStyled>
