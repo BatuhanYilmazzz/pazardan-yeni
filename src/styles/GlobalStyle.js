@@ -28,6 +28,19 @@ body{
         font-size:87.5%;
       }
 }
+
+textarea,
+select,
+input[type="text"],
+input[type="number"],
+input[type="button"],
+input[type="submit"],
+input[type="email"],
+input[type="tel"],
+input[type="password"]{
+     -webkit-appearance: none;
+    
+}
 .container{
   max-width:1200px !important;
   width:100%;

@@ -60,10 +60,14 @@ const HeaderStyled = styled.div`
     }
   }
   .showcase-img {
-    max-width: 100%;
+    max-width: 700px;
     margin-bottom: -10rem;
     @media (max-width: 768px) {
       margin-bottom: 1rem;
+    }
+    @media (max-width: 576px) {
+      margin-bottom: 1rem;
+      max-width: 350px;
     }
   }
   .title {
@@ -76,9 +80,9 @@ const HeaderStyled = styled.div`
   p {
     color: #fff;
     font-size: 18px;
-    font-family: 'Open Sans';
     margin-top: 0.5rem;
     margin-bottom: 4rem;
+    font-family: 'Open Sans', sans-serif;
     max-width: 500px;
     @media (max-width: 576px) {
       font-size: 14px;
