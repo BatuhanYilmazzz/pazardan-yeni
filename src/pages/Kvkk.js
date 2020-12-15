@@ -10,7 +10,7 @@ const Kvkk = () => {
     const fetchData = async () => {
       setLoading(true);
       const result = await axios(
-        'https://cors-anywhere.herokuapp.com/https://mservice.pazardan.app/pazardanWebApp/AgreementSelect?type=KVKK'
+        'https://mservice.pazardan.app/pazardanWebApp/AgreementSelect?type=KVKK'
       );
 
       setData(result.data.data[0].user_agreement_detail);

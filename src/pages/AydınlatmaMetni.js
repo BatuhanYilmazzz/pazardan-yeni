@@ -11,7 +11,7 @@ const AydınlatmaMetni = () => {
     const fetchData = async () => {
       setLoading(true);
       const result = await axios(
-        'https://cors-anywhere.herokuapp.com/https://mservice.pazardan.app/pazardanWebApp/AgreementSelect?type=AydinlatmaMetni',
+        'https://mservice.pazardan.app/pazardanWebApp/AgreementSelect?type=AydinlatmaMetni',
         {
           headers: {
             'Content-Type': 'application/json',

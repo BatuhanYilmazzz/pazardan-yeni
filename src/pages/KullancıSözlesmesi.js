@@ -10,7 +10,7 @@ const KullancıSözlesmesi = () => {
     const fetchData = async () => {
       setLoading(true);
       const result = await axios(
-        'https://cors-anywhere.herokuapp.com/https://mservice.pazardan.app/pazardanWebApp/AgreementSelect?type=KullaniciSozlesme'
+        'https://mservice.pazardan.app/pazardanWebApp/AgreementSelect?type=KullaniciSozlesme'
       );
 
       setData(result.data.data[0].user_agreement_detail);

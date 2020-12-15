@@ -14,7 +14,7 @@ const GizlilikSözlesmesi = () => {
         mode: 'no-cors',
       };
       const result = await axios(
-        'https://cors-anywhere.herokuapp.com/https://mservice.pazardan.app/pazardanWebApp/AgreementSelect?type=Gizlilik',
+        'https://mservice.pazardan.app/pazardanWebApp/AgreementSelect?type=Gizlilik',
         config
       );
 
