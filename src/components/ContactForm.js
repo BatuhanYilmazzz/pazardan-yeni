@@ -94,6 +94,7 @@ const ContactForm = () => {
           left: '50%',
           top: '40%',
           transform: 'translate(-50%, -50%)',
+          zIndex: 9999,
         }}
       >
         <Spinner animation='border' variant='success' />
