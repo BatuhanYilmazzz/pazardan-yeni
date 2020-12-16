@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import * as Scroll from 'react-scroll';
-import { Container, Row, Col } from 'react-bootstrap';
+import { Container, Row, Col, Spinner, Modal } from 'react-bootstrap';
 
 const ContactForm = () => {
   let Element = Scroll.Element;
+  const [loading, setLoading] = useState(false);
+  const [success, setSuccess] = useState(false);
   const [state, setState] = useState({
     name: '',
     surname: '',
@@ -20,6 +22,7 @@ const ContactForm = () => {
   };
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
     var myHeaders = new Headers();
     myHeaders.append(
       'Data',
@@ -47,10 +50,15 @@ const ContactForm = () => {
       'https://cors-anywhere.herokuapp.com/https://pazardan.int.bz/pazardanWebApp/DialogRecordInsert',
       requestOptions
     )
-      .then((response) => response.text())
+      .then((response) => {
+        if (response.status === 200) {
+          setLoading(false);
+          setSuccess(true);
+        }
+      })
       .then((result) => console.log(result))
       .catch((error) => console.log('error', error));
-    setTimeout(() => {
+    /*  setTimeout(() => {
       setState({
         name: '',
         surname: '',
@@ -59,11 +67,44 @@ const ContactForm = () => {
         phone: '',
         topic: '',
       });
-    }, 2000);
+    }, 2000); */
   };
+
+  function Success() {
+    return (
+      <Modal
+        show={success}
+        onHide={() => setSuccess(false)}
+        contentClassName='form-content'
+      >
+        <img src='/images/done.png' alt='' />
+      </Modal>
+    );
+  }
+
+  function Loading() {
+    return (
+      <div
+        style={{
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          flexDirection: 'column',
+          position: 'absolute',
+          left: '50%',
+          top: '40%',
+          transform: 'translate(-50%, -50%)',
+        }}
+      >
+        <Spinner animation='border' variant='success' />
+      </div>
+    );
+  }
   return (
     <ContactFormStyled>
       <Container>
+        <div className='modal-form'>{success && <Success />}</div>
+        {loading && <Loading />}
         <Element name='myScrollToElement' id='contact'>
           <img
             className='contact-us'
@@ -185,6 +226,7 @@ const ContactFormStyled = styled.div`
   padding: 4rem 1rem;
   max-width: 750px;
   margin: auto;
+  position: relative;
   .contact-us {
     max-width: 250px;
     margin-bottom: 3rem;

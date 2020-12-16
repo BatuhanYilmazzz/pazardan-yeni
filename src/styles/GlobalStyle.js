@@ -237,6 +237,15 @@ ul {
     margin-bottom:2rem;
   }
   }
+  .form-content{
+    max-width:300px !important;
+    background-color:transparent;
+    border:none;
+    img{
+        max-width:300px !important;
+      }
+  }
+  
  
 `;
 
