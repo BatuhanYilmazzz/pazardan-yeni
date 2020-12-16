@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import axios from 'axios';
-import { Container, Spinner } from 'react-bootstrap';
+
+import { Container } from 'react-bootstrap';
+import { gizlilik_sözlesmesi } from '../content';
 
 const GizlilikSözlesmesi = () => {
-  const [data, setData] = useState([]);
+  /*  const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
   useEffect(() => {
     const fetchData = async () => {
@@ -23,13 +23,13 @@ const GizlilikSözlesmesi = () => {
     };
     fetchData();
     // eslint-disable-next-line
-  }, []);
+  }, []); */
   function createMarkup() {
     return {
-      __html: data && data,
+      __html: gizlilik_sözlesmesi,
     };
   }
-  if (loading) {
+  /*  if (loading) {
     return (
       <div
         style={{
@@ -43,7 +43,7 @@ const GizlilikSözlesmesi = () => {
         <Spinner animation='grow' variant='dark' />
       </div>
     );
-  }
+  } */
   return (
     <GizlilikSözlesmesiStyled>
       <div className='gizlilik-header'>

@@ -1,44 +1,14 @@
-import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import axios from 'axios';
-import { Container, Spinner } from 'react-bootstrap';
+import { Container } from 'react-bootstrap';
+import { kullanıcı_sözlesmesi } from '../content';
 
 const KullancıSözlesmesi = () => {
-  const [data, setData] = useState([]);
-  const [loading, setLoading] = useState(false);
-  useEffect(() => {
-    const fetchData = async () => {
-      setLoading(true);
-      const result = await axios(
-        'https://mservice.pazardan.app/pazardanWebApp/AgreementSelect?type=KullaniciSozlesme'
-      );
-
-      setData(result.data.data[0].user_agreement_detail);
-      setLoading(false);
-    };
-    fetchData();
-    // eslint-disable-next-line
-  }, []);
   function createMarkup() {
     return {
-      __html: data && data,
+      __html: kullanıcı_sözlesmesi,
     };
   }
-  if (loading) {
-    return (
-      <div
-        style={{
-          height: '100vh',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          flexDirection: 'column',
-        }}
-      >
-        <Spinner animation='grow' variant='dark' />
-      </div>
-    );
-  }
+
   return (
     <KullancıSözlesmesiStyled>
       <div className='kullanıcı-header'>

@@ -9,6 +9,7 @@ import Sss from './pages/Sss';
 import GizlilikSözlesmesi from './pages/GizlilikSözlesmesi';
 import AydınlatmaMetni from './pages/AydınlatmaMetni';
 import KullancıSözlesmesi from './pages/KullancıSözlesmesi';
+import ScrollToTop from './components/ScrollToTop';
 
 function App() {
   return (
@@ -30,6 +31,7 @@ function App() {
           component={KullancıSözlesmesi}
         />
       </Switch>
+      <ScrollToTop />
       <Footer />
       <GlobalStyle />
     </BrowserRouter>
