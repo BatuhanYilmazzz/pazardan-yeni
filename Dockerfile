@@ -14,6 +14,6 @@ COPY --from=build-stage /app/build /usr/share/nginx/html
 
 COPY ./nginx/etc/nginx/  /etc/nginx/
 
-EXPOSE 81
+EXPOSE 80
 
 CMD ["nginx", "-g", "daemon off;"]
