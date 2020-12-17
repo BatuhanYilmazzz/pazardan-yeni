@@ -16,12 +16,12 @@ const Header = () => {
             <img
               src='/images/headings/cebindekisemtpazarı@2x.png'
               alt=''
-              className='title d-none d-sm-block'
+              className='title d-none d-sm-block mb-5'
             />
             <img
               src='/images/headingsmobile/cebindekisemtpazarı.png'
               alt=''
-              className='title d-sm-none'
+              className='title d-sm-none mb-3'
             />
             <p>
               Pazardan; adresinize yakın semt pazarlarında yer alan tezgahlardan
@@ -44,6 +44,7 @@ const Header = () => {
 export default Header;
 
 const HeaderStyled = styled.div`
+  margin-top: 9rem;
   background-color: #46742c;
   padding: 3rem 0;
   margin-bottom: 2rem;
@@ -60,14 +61,20 @@ const HeaderStyled = styled.div`
     }
   }
   .showcase-img {
-    max-width: 700px;
+    max-width: 800px;
     margin-bottom: -10rem;
+    margin-left: -9rem;
+    z-index: 10;
+    position: relative;
     @media (max-width: 768px) {
       margin-bottom: 1rem;
+
+      max-width: 600px;
     }
     @media (max-width: 576px) {
       margin-bottom: 1rem;
       max-width: 350px;
+      margin-left: 0;
     }
   }
   .title {
@@ -86,6 +93,7 @@ const HeaderStyled = styled.div`
     max-width: 500px;
     @media (max-width: 576px) {
       font-size: 14px;
+      margin-bottom: 3rem;
     }
   }
 `;

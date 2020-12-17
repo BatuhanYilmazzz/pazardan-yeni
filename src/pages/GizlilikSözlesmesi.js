@@ -61,6 +61,7 @@ const GizlilikSözlesmesi = () => {
 export default GizlilikSözlesmesi;
 
 const GizlilikSözlesmesiStyled = styled.div`
+  margin-top: 9rem;
   .gizlilik-header {
     background-color: #46742c;
     padding: 2rem 0;

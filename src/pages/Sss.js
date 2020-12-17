@@ -27,6 +27,7 @@ const Sss = () => {
 export default Sss;
 
 const SssStyled = styled.div`
+  margin-top: 9rem;
   .sss-header {
     background-color: #46742c;
     padding: 2rem 0;

@@ -54,7 +54,7 @@ export const data = [
     title2: '/images/headings/temassızpazaralısveris@2x.png',
     title2mobile: '/images/headingsmobile/temassızpazar.png',
     maxWidth: '60%',
-    maxWidthMobile: '80%',
+    maxWidthMobile: '100%',
     paragraph2:
       'Semt pazarından evinize gelecek taptaze sebze ve meyveleri, hiçbir şeye temas etmeden teslim alın. Pazarcınıza puan verin ve görüşlerinizi paylaşın.',
     img2: '/images/screenshot_08.png',

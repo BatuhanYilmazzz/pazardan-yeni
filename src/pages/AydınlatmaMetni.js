@@ -26,6 +26,7 @@ const AydınlatmaMetni = () => {
 export default AydınlatmaMetni;
 
 const AydınlatmaMetniStyled = styled.div`
+  margin-top: 9rem;
   .aydınlatma-header {
     background-color: #46742c;
     padding: 2rem 0;

@@ -88,25 +88,31 @@ const Menu = () => {
   return (
     <Container>
       <MenuStyled>
-        <div className='logo'>
-          <NavLink to='/'>
-            <img src='/images/logo.png' alt='' className='d-none d-sm-block' />
-          </NavLink>
-          <NavLink to='/'>
-            <img
-              src='/images/headingsmobile/pazardan.png'
-              alt=''
-              className='d-sm-none'
-            />
-          </NavLink>
-        </div>
-        <div className='button-wrapper'>
-          <button onClick={() => setModalShow(true)}>
-            Satıcı olmak istiyorum
-          </button>
-          <button className='contact' onClick={handleClick}>
-            İletişim
-          </button>
+        <div className='wrapper'>
+          <div className='logo'>
+            <NavLink to='/'>
+              <img
+                src='/images/logo.png'
+                alt=''
+                className='d-none d-sm-block'
+              />
+            </NavLink>
+            <NavLink to='/'>
+              <img
+                src='/images/headingsmobile/pazardan.png'
+                alt=''
+                className='d-sm-none'
+              />
+            </NavLink>
+          </div>
+          <div className='button-wrapper'>
+            <button onClick={() => setModalShow(true)}>
+              Satıcı olmak istiyorum
+            </button>
+            <button className='contact' onClick={handleClick}>
+              İletişim
+            </button>
+          </div>
         </div>
       </MenuStyled>
       <Modal
@@ -196,15 +202,28 @@ const Menu = () => {
 export default Menu;
 
 const MenuStyled = styled.div`
-  padding: 1.5rem 1rem;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  @media (max-width: 576px) {
-    display: block;
-    text-align: center;
-    padding: 4rem 1rem 1.5rem 1rem;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+
+  background-color: #fff;
+  z-index: 9;
+
+  .wrapper {
+    max-width: 1200px;
+    padding: 1.5rem 1rem;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    @media (max-width: 576px) {
+      display: block;
+      text-align: center;
+      padding: 0.5rem 1rem;
+    }
   }
+
   .logo {
     display: flex;
     align-items: center;

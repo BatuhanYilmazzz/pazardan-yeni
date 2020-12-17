@@ -45,7 +45,7 @@ input[type="password"]{
   max-width:1200px !important;
   width:100%;
   margin: auto;
-
+  position:relative;
   @media (max-width: 768px) {
     padding: 0 .3rem;
     max-width:100% !important;

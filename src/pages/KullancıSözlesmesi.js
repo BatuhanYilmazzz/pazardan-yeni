@@ -24,7 +24,9 @@ const KullancıSözlesmesi = () => {
 };
 
 export default KullancıSözlesmesi;
+
 const KullancıSözlesmesiStyled = styled.div`
+  margin-top: 9rem;
   .kullanıcı-header {
     background-color: #46742c;
     padding: 2rem 0;
