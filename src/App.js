@@ -10,6 +10,7 @@ import GizlilikSözlesmesi from './pages/GizlilikSözlesmesi';
 import AydınlatmaMetni from './pages/AydınlatmaMetni';
 import KullancıSözlesmesi from './pages/KullancıSözlesmesi';
 import ScrollToTop from './components/ScrollToTop';
+import ContactForm from './components/ContactForm';
 
 function App() {
   return (
@@ -32,6 +33,7 @@ function App() {
         />
       </Switch>
       <ScrollToTop />
+      <ContactForm />
       <Footer />
       <GlobalStyle />
     </BrowserRouter>

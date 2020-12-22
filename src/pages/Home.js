@@ -2,7 +2,7 @@ import React from 'react';
 import LeftCard from '../components/LeftCard';
 import RigtCard from '../components/RightCard';
 import Header from '../components/Header';
-import ContactForm from '../components/ContactForm';
+
 import styled from 'styled-components';
 import { data } from '../content';
 import { Fragment } from 'react';
@@ -38,7 +38,6 @@ const Home = () => {
         </Fragment>
       ))}
       <img className='map-pazardan' src='/images/map_pazardan@2x.png' alt='' />
-      <ContactForm />
     </HomeStyled>
   );
 };

@@ -82,7 +82,7 @@ const Menu = () => {
       duration: 800,
       delay: 1,
       smooth: 'easeInOutQuart',
-      offset: -50,
+      offset: -150,
     });
   };
   return (

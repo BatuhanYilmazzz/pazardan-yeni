@@ -291,6 +291,9 @@ const ContactFormStyled = styled.div`
     overflow: hidden;
     border-radius: 3px;
     cursor: pointer;
+    @media (max-width: 576px) {
+      width: 3.5rem;
+    }
   }
   input[type='checkbox']::before {
     content: '';
