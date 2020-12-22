@@ -292,7 +292,7 @@ const ContactFormStyled = styled.div`
     border-radius: 3px;
     cursor: pointer;
     @media (max-width: 576px) {
-      width: 3.5rem;
+      width: 4.5rem;
     }
   }
   input[type='checkbox']::before {
