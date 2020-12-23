@@ -4,24 +4,12 @@ import styled from 'styled-components';
 import { scroller } from 'react-scroll';
 import { NavLink } from 'react-router-dom';
 import Input from 'react-phone-number-input/input';
-
-function DoneModal(props) {
-  return (
-    <Modal
-      {...props}
-      size='sm'
-      aria-labelledby='contained-modal-title-vcenter'
-      centered
-      className='little-modal'
-    >
-      <img src='/images/done.png' alt='' onClick={props.onHide} />
-    </Modal>
-  );
-}
+import Loading from './Loading';
 
 const Menu = () => {
-  const [modalShow2, setModalShow2] = useState(false);
   const [modalShow, setModalShow] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [success, setSuccess] = useState(false);
   const [state, setState] = useState({
     name: '',
     surname: '',
@@ -33,6 +21,7 @@ const Menu = () => {
   };
 
   const handleSubmit = (e) => {
+    setLoading(true);
     e.preventDefault();
     var myHeaders = new Headers();
     myHeaders.append(
@@ -43,7 +32,7 @@ const Menu = () => {
         opvalue: '',
         formid: '',
         dialog_record_source_type: 'Webform',
-        dialog_record_subject_type: 'Konu',
+        dialog_record_subject_type: 'Satıcı Basvuru',
         dialog_record_user_note: '[NOTLAR]',
         dialog_record_contact_information: `ad:${state.name}, soyad:${state.surname},sehir:${state.city},telefon:${phone}`,
         dialog_record_is_active: '1',
@@ -58,17 +47,20 @@ const Menu = () => {
     };
 
     fetch(
-      'https://cors-anywhere.herokuapp.com/https://pazardan.int.bz/pazardanWebApp/DialogRecordInsert',
+      'https://cors-anywhere.herokuapp.com/https://mservice.pazardan.app/pazardanWebApp/DialogRecordInsert',
       requestOptions
     )
-      .then((response) => response.text())
+      .then((response) => {
+        if (response.status === 200) {
+          setLoading(false);
+          setSuccess(true);
+          setModalShow(false);
+        }
+      })
       .then((result) => console.log(result))
       .catch((error) => console.log('error', error));
-    setTimeout(() => {
-      setModalShow(false);
-      setModalShow2(true);
-    }, 1000);
-    setTimeout(() => {
+
+    /*  setTimeout(() => {
       setState({
         name: '',
         surname: '',
@@ -76,9 +68,19 @@ const Menu = () => {
         phone: '',
       });
       setPhone('');
-    }, 2000);
+    }, 2000); */
   };
-
+  function Success() {
+    return (
+      <Modal
+        show={success}
+        onHide={() => setSuccess(false)}
+        contentClassName='form-content'
+      >
+        <img src='/images/done.png' alt='' onClick={() => setSuccess(false)} />
+      </Modal>
+    );
+  }
   const handleClick = () => {
     scroller.scrollTo('myScrollToElement', {
       duration: 800,
@@ -90,6 +92,8 @@ const Menu = () => {
   return (
     <Container>
       <MenuStyled>
+        <div className='modal-form'>{success && <Success />}</div>
+
         <div className='wrapper'>
           <div className='logo'>
             <NavLink to='/'>
@@ -123,6 +127,7 @@ const Menu = () => {
         aria-labelledby='contained-modal-title-vcenter'
         centered
       >
+        {loading && <Loading />}
         <div className='header-wrapper'>
           <img
             src='/images/close.png'
@@ -196,7 +201,7 @@ const Menu = () => {
           </button>
         </form>
       </Modal>
-      <DoneModal show={modalShow2} onHide={() => setModalShow2(false)} />
+      {/* <DoneModal show={modalShow2} onHide={() => setModalShow2(false)} /> */}
     </Container>
   );
 };

@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import * as Scroll from 'react-scroll';
 import Input from 'react-phone-number-input/input';
-import { Container, Row, Col, Spinner, Modal } from 'react-bootstrap';
-
+import { Container, Row, Col, Modal } from 'react-bootstrap';
+import Loading from './Loading';
 const ContactForm = () => {
   let Element = Scroll.Element;
   const [loading, setLoading] = useState(false);
@@ -36,8 +36,8 @@ const ContactForm = () => {
         formid: '',
         dialog_record_source_type: 'Webform',
         dialog_record_subject_type: state.topic,
-        dialog_record_user_note: '[NOTLAR]',
-        dialog_record_contact_information: `ad:${state.name}, soyad:${state.surname},telefon:${phone},mesaj:${state.message},iletileri almak istiyorum:${state.ileti} `,
+        dialog_record_user_note: state.message,
+        dialog_record_contact_information: `ad:${state.name}, soyad:${state.surname},telefon:${phone},iletileri almak istiyorum:${state.ileti} `,
         dialog_record_is_active: '1',
         dialog_record_is_deleted: '0',
       })
@@ -50,7 +50,7 @@ const ContactForm = () => {
     };
 
     fetch(
-      'https://cors-anywhere.herokuapp.com/https://pazardan.int.bz/pazardanWebApp/DialogRecordInsert',
+      'https://cors-anywhere.herokuapp.com/https://mservice.pazardan.app/pazardanWebApp/DialogRecordInsert',
       requestOptions
     )
       .then((response) => {
@@ -61,7 +61,7 @@ const ContactForm = () => {
       })
       .then((result) => console.log(result))
       .catch((error) => console.log('error', error));
-    setTimeout(() => {
+    /*  setTimeout(() => {
       setPhone('');
       setState({
         name: '',
@@ -71,9 +71,9 @@ const ContactForm = () => {
         phone: '',
         topic: '',
       });
-    }, 2000);
+    }, 2000); */
   };
-
+  console.log(state);
   function Success() {
     return (
       <Modal
@@ -81,30 +81,11 @@ const ContactForm = () => {
         onHide={() => setSuccess(false)}
         contentClassName='form-content'
       >
-        <img src='/images/done.png' alt='' />
+        <img src='/images/done.png' alt='' onClick={() => setSuccess(false)} />
       </Modal>
     );
   }
 
-  function Loading() {
-    return (
-      <div
-        style={{
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          flexDirection: 'column',
-          position: 'absolute',
-          left: '50%',
-          top: '40%',
-          transform: 'translate(-50%, -50%)',
-          zIndex: 9999,
-        }}
-      >
-        <Spinner animation='border' variant='success' />
-      </div>
-    );
-  }
   return (
     <ContactFormStyled>
       <Container>
@@ -176,10 +157,10 @@ const ContactForm = () => {
                   value={state.topic}
                   onChange={onChange}
                 >
-                  <option value='öneri'>Öneri</option>
-                  <option value='sikayet'>Şikayet</option>
+                  <option value='Öneri'>Öneri</option>
+                  <option value='Şikayet'>Şikayet</option>
                   <option value='iade'>İade</option>
-                  <option value='diger'>Diğer</option>
+                  <option value='Diğer'>Diğer</option>
                 </select>
               </div>
             </Col>
@@ -340,5 +321,10 @@ const ContactFormStyled = styled.div`
     font-size: 14px;
     color: #fff;
     font-weight: bold;
+  }
+  .modal-form {
+    img:hover {
+      cursor: pointer;
+    }
   }
 `;

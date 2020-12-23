@@ -116,6 +116,13 @@ ul {
     max-width:620px;
     margin:auto;
     border-radius:27px;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+    img:hover{
+    cursor: pointer !important;
+    
+  }
     @media(max-width:576px){
     width:100%;
     height:100vh;
@@ -130,6 +137,12 @@ ul {
  margin:0;
     }
 }
+
+.fade.modal.show{
+  display:flex !important;
+  align-items:center !important;
+  justify-content:center !important; 
+}
 .header-wrapper {
     background-image: url('/images/texture_01@2x.png');
     background-size: cover;
@@ -139,6 +152,7 @@ ul {
     padding:3rem 2.5rem 2rem 2.5rem;
     border-radius:27px;
     position:relative;
+    width:100%;
     h1,p{
       text-align:center;
     }
@@ -148,6 +162,8 @@ ul {
      margin:1rem auto;
      @media(max-width:576px){
       max-width:250px;
+      padding:0;
+      
     }
    }
     p{
@@ -166,8 +182,10 @@ ul {
   .form{
   padding:2rem 2rem;
   text-align:center;
+ 
   @media(max-width:576px){
     padding:1rem 1rem;
+    margin-top:2rem;
     }
   input,
   select
