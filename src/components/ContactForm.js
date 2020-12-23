@@ -73,7 +73,7 @@ const ContactForm = () => {
       });
     }, 2000); */
   };
-  console.log(state);
+
   function Success() {
     return (
       <Modal
