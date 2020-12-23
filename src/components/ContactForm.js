@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import * as Scroll from 'react-scroll';
+import Input from 'react-phone-number-input/input';
 import { Container, Row, Col, Spinner, Modal } from 'react-bootstrap';
 
 const ContactForm = () => {
@@ -12,14 +13,16 @@ const ContactForm = () => {
     surname: '',
     message: '',
     email: '',
-    phone: '',
     ileti: false,
     topic: '',
   });
 
+  const [phone, setPhone] = useState('');
+
   const onChange = (e) => {
     setState({ ...state, [e.target.name]: e.target.value });
   };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
@@ -34,7 +37,7 @@ const ContactForm = () => {
         dialog_record_source_type: 'Webform',
         dialog_record_subject_type: state.topic,
         dialog_record_user_note: '[NOTLAR]',
-        dialog_record_contact_information: `ad:${state.name}, soyad:${state.surname},telefon:${state.phone},mesaj:${state.message},iletileri almak istiyorum:${state.ileti} `,
+        dialog_record_contact_information: `ad:${state.name}, soyad:${state.surname},telefon:${phone},mesaj:${state.message},iletileri almak istiyorum:${state.ileti} `,
         dialog_record_is_active: '1',
         dialog_record_is_deleted: '0',
       })
@@ -58,7 +61,8 @@ const ContactForm = () => {
       })
       .then((result) => console.log(result))
       .catch((error) => console.log('error', error));
-    /*  setTimeout(() => {
+    setTimeout(() => {
+      setPhone('');
       setState({
         name: '',
         surname: '',
@@ -67,7 +71,7 @@ const ContactForm = () => {
         phone: '',
         topic: '',
       });
-    }, 2000); */
+    }, 2000);
   };
 
   function Success() {
@@ -142,12 +146,12 @@ const ContactForm = () => {
             <Col md={6}>
               <div className='input-wrapper'>
                 <p className='input-title'>Telefon Numaranız</p>
-                <input
-                  type='number'
-                  name='phone'
-                  value={state.phone}
-                  onChange={onChange}
-                  required
+                <Input
+                  country='TR'
+                  international
+                  withCountryCallingCode
+                  value={phone}
+                  onChange={setPhone}
                 />
               </div>
             </Col>

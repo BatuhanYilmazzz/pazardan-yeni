@@ -3,6 +3,7 @@ import { Modal, Col, Row, Container } from 'react-bootstrap';
 import styled from 'styled-components';
 import { scroller } from 'react-scroll';
 import { NavLink } from 'react-router-dom';
+import Input from 'react-phone-number-input/input';
 
 function DoneModal(props) {
   return (
@@ -25,12 +26,12 @@ const Menu = () => {
     name: '',
     surname: '',
     city: '',
-    phone: '',
   });
+  const [phone, setPhone] = useState('');
   const onChange = (e) => {
     setState({ ...state, [e.target.name]: e.target.value });
   };
-
+  console.log(state);
   const handleSubmit = (e) => {
     e.preventDefault();
     var myHeaders = new Headers();
@@ -44,7 +45,7 @@ const Menu = () => {
         dialog_record_source_type: 'Webform',
         dialog_record_subject_type: 'Konu',
         dialog_record_user_note: '[NOTLAR]',
-        dialog_record_contact_information: `ad:${state.name}, soyad:${state.surname},şehir:${state.city},telefon:${state.phone}`,
+        dialog_record_contact_information: `ad:${state.name}, soyad:${state.surname},sehir:${state.city},telefon:${phone}`,
         dialog_record_is_active: '1',
         dialog_record_is_deleted: '0',
       })
@@ -63,7 +64,7 @@ const Menu = () => {
       .then((response) => response.text())
       .then((result) => console.log(result))
       .catch((error) => console.log('error', error));
-    /*  setTimeout(() => {
+    setTimeout(() => {
       setModalShow(false);
       setModalShow2(true);
     }, 1000);
@@ -74,7 +75,8 @@ const Menu = () => {
         city: '',
         phone: '',
       });
-    }, 2000); */
+      setPhone('');
+    }, 2000);
   };
 
   const handleClick = () => {
@@ -167,12 +169,12 @@ const Menu = () => {
             <Col xs={12}>
               <div className='input-wrapper'>
                 <p className='input-title'>Telefon Numaranız</p>
-                <input
-                  type='number'
-                  name='phone'
-                  value={state.phone}
-                  onChange={onChange}
-                  required
+                <Input
+                  country='TR'
+                  international
+                  withCountryCallingCode
+                  value={phone}
+                  onChange={setPhone}
                 />
               </div>
             </Col>
