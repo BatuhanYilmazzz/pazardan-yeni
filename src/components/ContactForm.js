@@ -61,7 +61,7 @@ const ContactForm = () => {
       })
       .then((result) => console.log(result))
       .catch((error) => console.log('error', error));
-    /*  setTimeout(() => {
+    setTimeout(() => {
       setPhone('');
       setState({
         name: '',
@@ -71,7 +71,7 @@ const ContactForm = () => {
         phone: '',
         topic: '',
       });
-    }, 2000); */
+    }, 2000);
   };
 
   function Success() {

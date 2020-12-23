@@ -60,7 +60,7 @@ const Menu = () => {
       .then((result) => console.log(result))
       .catch((error) => console.log('error', error));
 
-    /*  setTimeout(() => {
+    setTimeout(() => {
       setState({
         name: '',
         surname: '',
@@ -68,7 +68,7 @@ const Menu = () => {
         phone: '',
       });
       setPhone('');
-    }, 2000); */
+    }, 2000);
   };
   function Success() {
     return (
