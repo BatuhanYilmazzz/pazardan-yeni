@@ -4,6 +4,7 @@ import * as Scroll from 'react-scroll';
 import Input from 'react-phone-number-input/input';
 import { Container, Row, Col, Modal } from 'react-bootstrap';
 import Loading from './Loading';
+import axios from 'axios';
 const ContactForm = () => {
   let Element = Scroll.Element;
   const [loading, setLoading] = useState(false);
@@ -14,7 +15,7 @@ const ContactForm = () => {
     message: '',
     email: '',
     ileti: false,
-    topic: '',
+    topic: false,
   });
 
   const [phone, setPhone] = useState('');
@@ -25,42 +26,31 @@ const ContactForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setLoading(true);
-    var myHeaders = new Headers();
-    myHeaders.append(
+
+    var data = new FormData();
+    data.append(
       'Data',
-      JSON.stringify({
-        optarget: 'tbl_dialog_record',
-        optype: 'insert',
-        opvalue: '',
-        formid: '',
-        dialog_record_source_type: 'Webform',
-        dialog_record_subject_type: state.topic,
-        dialog_record_user_note: state.message,
-        dialog_record_contact_information: `ad:${state.name}, soyad:${state.surname},telefon:${phone},iletileri almak istiyorum:${state.ileti} `,
-        dialog_record_is_active: '1',
-        dialog_record_is_deleted: '0',
-      })
+      `{"optarget":"tbl_dialog_record","optype":"insert","opvalue":"","formid":"","dialog_record_source_type":"Webform","dialog_record_subject_type":"${state.topic}","dialog_record_user_note":"${state.message}","dialog_record_contact_information":"isim:${state.name} ,soyisim:${state.surname} ,mail:${state.email} ,telefon:${phone} ,iletileri almak istiyorum:${state.ileti}","dialog_record_is_active":"1","dialog_record_is_deleted":"0"}`
     );
-
-    var requestOptions = {
-      method: 'POST',
-      headers: myHeaders,
-      redirect: 'follow',
+    var config = {
+      method: 'post',
+      url:
+        'https://cors-anywhere.herokuapp.com/https://mservice.pazardan.app/pazardanWebApp/DialogRecordInsert',
+      data: data,
+      mode: 'no-cors',
     };
-
-    fetch(
-      'https://cors-anywhere.herokuapp.com/https://mservice.pazardan.app/pazardanWebApp/DialogRecordInsert',
-      requestOptions
-    )
-      .then((response) => {
+    axios(config)
+      .then(function (response) {
+        console.log(JSON.stringify(response.data));
         if (response.status === 200) {
           setLoading(false);
           setSuccess(true);
         }
       })
-      .then((result) => console.log(result))
-      .catch((error) => console.log('error', error));
+      .catch(function (error) {
+        console.log(error);
+      });
+
     setTimeout(() => {
       setPhone('');
       setState({
@@ -85,7 +75,7 @@ const ContactForm = () => {
       </Modal>
     );
   }
-
+  console.log(state.ileti);
   return (
     <ContactFormStyled>
       <Container>

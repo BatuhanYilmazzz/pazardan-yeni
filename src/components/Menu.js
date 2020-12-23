@@ -5,7 +5,7 @@ import { scroller } from 'react-scroll';
 import { NavLink } from 'react-router-dom';
 import Input from 'react-phone-number-input/input';
 import Loading from './Loading';
-
+import axios from 'axios';
 const Menu = () => {
   const [modalShow, setModalShow] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -23,42 +23,33 @@ const Menu = () => {
   const handleSubmit = (e) => {
     setLoading(true);
     e.preventDefault();
-    var myHeaders = new Headers();
-    myHeaders.append(
+
+    var data = new FormData();
+
+    data.append(
       'Data',
-      JSON.stringify({
-        optarget: 'tbl_dialog_record',
-        optype: 'insert',
-        opvalue: '',
-        formid: '',
-        dialog_record_source_type: 'Webform',
-        dialog_record_subject_type: 'Satıcı Basvuru',
-        dialog_record_user_note: '[NOTLAR]',
-        dialog_record_contact_information: `ad:${state.name}, soyad:${state.surname},sehir:${state.city},telefon:${phone}`,
-        dialog_record_is_active: '1',
-        dialog_record_is_deleted: '0',
-      })
+      `{"optarget":"tbl_dialog_record","optype":"insert","opvalue":"","formid":"","dialog_record_source_type":"Webform","dialog_record_subject_type":"Satıcı Başvuru","dialog_record_user_note":"[NOTLAR]","dialog_record_contact_information":"isim:${state.name} soyisim:${state.surname} şehir:${state.city} telefon:${phone}","dialog_record_is_active":"1","dialog_record_is_deleted":"0"}`
     );
+    var config = {
+      method: 'post',
+      url:
+        'https://cors-anywhere.herokuapp.com/https://mservice.pazardan.app/pazardanWebApp/DialogRecordInsert',
 
-    var requestOptions = {
-      method: 'POST',
-      headers: myHeaders,
-      redirect: 'follow',
+      data: data,
+      mode: 'no-cors',
     };
-
-    fetch(
-      'https://cors-anywhere.herokuapp.com/https://mservice.pazardan.app/pazardanWebApp/DialogRecordInsert',
-      requestOptions
-    )
-      .then((response) => {
+    axios(config)
+      .then(function (response) {
+        console.log(JSON.stringify(response.data));
         if (response.status === 200) {
           setLoading(false);
           setSuccess(true);
           setModalShow(false);
         }
       })
-      .then((result) => console.log(result))
-      .catch((error) => console.log('error', error));
+      .catch(function (error) {
+        console.log(error);
+      });
 
     setTimeout(() => {
       setState({
@@ -81,6 +72,7 @@ const Menu = () => {
       </Modal>
     );
   }
+
   const handleClick = () => {
     scroller.scrollTo('myScrollToElement', {
       duration: 800,
