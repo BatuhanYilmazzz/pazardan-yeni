@@ -25,8 +25,8 @@ const ContactForm = () => {
   };
 
   const handleSubmit = async (e) => {
+    setLoading(true);
     e.preventDefault();
-
     var data = new FormData();
     data.append(
       'Data',
@@ -41,7 +41,6 @@ const ContactForm = () => {
     };
     axios(config)
       .then(function (response) {
-        console.log(JSON.stringify(response.data));
         if (response.status === 200) {
           setLoading(false);
           setSuccess(true);
@@ -50,18 +49,18 @@ const ContactForm = () => {
       .catch(function (error) {
         console.log(error);
       });
-
-    setTimeout(() => {
-      setPhone('');
-      setState({
-        name: '',
-        surname: '',
-        message: '',
-        email: '',
-        phone: '',
-        topic: '',
-      });
-    }, 2000);
+    /* 
+      setTimeout(() => {
+        setPhone('');
+        setState({
+          name: '',
+          surname: '',
+          message: '',
+          email: '',
+          phone: '',
+          topic: '',
+        });
+      }, 2000); */
   };
 
   function Success() {
@@ -75,7 +74,7 @@ const ContactForm = () => {
       </Modal>
     );
   }
-  console.log(state.ileti);
+
   return (
     <ContactFormStyled>
       <Container>

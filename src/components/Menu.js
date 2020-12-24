@@ -40,7 +40,6 @@ const Menu = () => {
     };
     axios(config)
       .then(function (response) {
-        console.log(JSON.stringify(response.data));
         if (response.status === 200) {
           setLoading(false);
           setSuccess(true);
